@@ -1,0 +1,36 @@
+{
+    "selector": "div.swagger-ui div.wrapper:nth-child(4)",
+    "operation": null,
+    "name":null,
+    "children": {
+        "name":"entity",
+        "selector": "section > div > span",
+        "operation": {
+            "selector": "div.opblock-tag-section",
+            "event": "click"
+        },
+        "output": [
+            {
+                "selector": "h3.opblock-tag > a > span",
+                "name": "controller",
+                "value": ["innerText"]
+            }
+        ],
+        "children": {
+            "name":"attributes",
+            "selector": "div.opblock-tag-section > div.no-margin > div.operation-tag-content > span",
+            "output": [
+                {
+                    "selector": "div.opblock > div.opblock-summary > button.opblock-summary-control > span.opblock-summary-method",
+                    "name": "method",
+                    "value": ["innerText"]
+                },
+                {
+                    "selector": "div.opblock > div.opblock-summary > button.opblock-summary-control > span.opblock-summary-path",
+                    "name": "path",
+                    "value": ["attributes","data-path","value"]
+                }
+            ]
+        }
+    }
+}
