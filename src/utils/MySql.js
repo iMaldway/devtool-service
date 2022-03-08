@@ -1,6 +1,17 @@
-var config = require('../../config/default.js')
+let config = require('../../config/default.js')
 
-var mysql = require('mysql')
+let mysql = require('mysql')
+
+/**
+ * 初始化连接池
+ */
+const pool = mysql.createPool({
+	host: config.database.host,
+	port: config.database.port,
+	user: config.database.username,
+	password: config.database.password,
+	database: config.database.database
+})
 
 class Connect {
 
@@ -14,13 +25,7 @@ class Connect {
 		this.password = password
 		this.database = database
 		this.port = port
-		this.pool = mysql.createPool({
-			host: this.host,
-			port: this.port,
-			user: this.user,
-			password: this.password,
-			database: this.database
-		})
+		this.pool = pool
 	}
 
 	/**
