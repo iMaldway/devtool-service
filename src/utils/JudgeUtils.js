@@ -30,7 +30,7 @@ function Utils() {
 	}
 	// 邮箱格式校验
 	this.isMaill = function(value) {
-		return /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(value)
+		return /^([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\\_|\\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(value)
 	}
 	// 身份证格式校验
 	this.isID = function(value) {
@@ -87,3 +87,4 @@ function Utils() {
 const JudgeUtils = new Utils()
 
 module.exports = JudgeUtils
+export default JudgeUtils
