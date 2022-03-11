@@ -1,5 +1,0 @@
-{
-  "daoPath": "/src/dao",
-  "servicePath": "/src/service",
-  "controllersPath": "/src/controllers"
-}

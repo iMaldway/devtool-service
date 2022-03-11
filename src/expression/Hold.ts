@@ -1,5 +1,8 @@
 const fs = require('fs')
-const cwd = process.cwd();
+const path=require('path');
+let cwd = path.join(__dirname,'../');
+cwd = cwd.slice(0,cwd.length-1);
+
 
 /**
 * @todo 使用此注解的属性将持有该属性名对象，不会进行实例化（no new）。

@@ -5,13 +5,13 @@ export default class BaseService implements BaseServiceInterface {
 
 	public dao;
 
-	@Hold('/src/class')
+	@Hold('/class')
 	public HttpExcetion;
 
-	@Hold('/src/utils')
+	@Hold('/utils')
 	public JudgeUtils;
 
-	@Hold('/src/utils')
+	@Hold('/utils')
 	public ObjectUtils;
 
 	constructor(dao) {

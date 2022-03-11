@@ -9,16 +9,16 @@ export default class BaseController implements BaseControllerInterface{
 
 	public Api;
 
-	@Hold('/src/class')
+	@Hold('/class')
 	public HttpResponse;
 
-	@Hold('/src/class')
+	@Hold('/class')
 	public HttpExcetion;
 
-	@Hold('/src/utils')
+	@Hold('/utils')
 	public JudgeUtils;
 
-	@Hold('/src/utils')
+	@Hold('/utils')
 	public ObjectUtils;
 
 	constructor(service) {

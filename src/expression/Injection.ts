@@ -1,7 +1,9 @@
 const fs = require('fs')
-const config = require('../config/expression.json')
+const path=require('path');
+const config = require('../config/expression')
 import InjectionType from '../enum/InjectionType'
-const cwd = process.cwd();
+let cwd = path.join(__dirname,'../');
+cwd = cwd.slice(0,cwd.length-1);
 
 /**
 * @todo 仅限自动注入Service或者Dao。

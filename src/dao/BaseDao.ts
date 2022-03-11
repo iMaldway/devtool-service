@@ -9,7 +9,7 @@ export default class BaseDao implements BaseDaoInterface{
 	public tableName:string;
 	public resultToTable:any;
 
-	@Example('/src/utils','MySql')
+	@Example('/utils','MySql')
 	public MySqlConnect:any;
 
 	constructor(tableName:string) {
