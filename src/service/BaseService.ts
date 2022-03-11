@@ -1,15 +1,18 @@
-const JudgeUtils = require('../utils/JudgeUtils')
-const ObjectUtils = require('../utils/ObjectUtils')
-
-import HttpExcetion from '../class/HttpExcetion'
+import Hold from '../expression/Hold'
 import BaseServiceInterface from '../interface/BaseServiceInterface'
 
 export default class BaseService implements BaseServiceInterface {
 
 	public dao;
-	public HttpExcetion = HttpExcetion;
-	public JudgeUtils = JudgeUtils;
-	public ObjectUtils = ObjectUtils;
+
+	@Hold('/src/class')
+	public HttpExcetion;
+
+	@Hold('/src/utils')
+	public JudgeUtils;
+
+	@Hold('/src/utils')
+	public ObjectUtils;
 
 	constructor(dao) {
 		try {
@@ -102,7 +105,7 @@ export default class BaseService implements BaseServiceInterface {
      */
 	required(parameter, errorMessages, code = 400) {
 		if (this.JudgeUtils.isBlank(parameter) || this.JudgeUtils.isBlankString(parameter)) {
-			throw new HttpExcetion(errorMessages, code)
+			throw new this.HttpExcetion(errorMessages, code)
 		}
 	}
 
@@ -114,11 +117,11 @@ export default class BaseService implements BaseServiceInterface {
 	notNull(parameter, errorMessages, code = 400) {
 		// 如果 检查的数值不存在，则抛出异常
 		if (!parameter) {
-			throw new HttpExcetion(errorMessages, code)
+			throw new this.HttpExcetion(errorMessages, code)
 		} else {
 			// 如果是数组并且查不到数据，则抛出异常
-			if (ObjectUtils.isArrayFn(parameter) && parameter.length <= 0) {
-				throw new HttpExcetion(errorMessages, code)
+			if (this.ObjectUtils.isArrayFn(parameter) && parameter.length <= 0) {
+				throw new this.HttpExcetion(errorMessages, code)
 			}
 		}
 	}

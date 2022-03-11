@@ -1,25 +1,28 @@
+import Injection from '../expression/Injection'
+import InjectionType from '../enum/InjectionType'
 const BaseService = require('./BaseService')
-
-const DevtoolDatabaseDAO = require('../dao/DevtoolDatabaseDAO')
-const DevtoolTemplateDAO = require('../dao/DevtoolTemplateDAO')
-const DevtoolTemplateFileDAO = require('../dao/DevtoolTemplateFileDAO')
-const DevtoolGeneratorConfigDAO = require('../dao/DevtoolGeneratorConfigDAO')
-const DevtoolAnalysisDAO = require('../dao/DevtoolAnalysisDAO')
-
-const GenerateAPIService = require('../service/GenerateAPIService')
-
 const { tableToResult } = require('../utils/TransformationUtil')
-
 const ejs = require('ejs')
 
 export default class Service extends BaseService {
 
-	public DevtoolDatabaseDAO = new DevtoolDatabaseDAO();
-	public DevtoolTemplateDAO = new DevtoolTemplateDAO();
-	public DevtoolTemplateFileDAO = new DevtoolTemplateFileDAO();
-	public DevtoolAnalysisDAO = new DevtoolAnalysisDAO();
-	public DevtoolGeneratorConfigDAO = new DevtoolGeneratorConfigDAO();
-	public GenerateAPIService = new GenerateAPIService();
+	@Injection(InjectionType.Dao)
+	public DevtoolDatabaseDAO;
+
+	@Injection(InjectionType.Dao)
+	public DevtoolTemplateDAO;
+
+	@Injection(InjectionType.Dao)
+	public DevtoolTemplateFileDAO;
+
+	@Injection(InjectionType.Dao)
+	public DevtoolAnalysisDAO;
+
+	@Injection(InjectionType.Dao)
+	public DevtoolGeneratorConfigDAO;
+
+	@Injection(InjectionType.Service)
+	public GenerateAPIService;
 
 	constructor() {
 		// 先实例化父级

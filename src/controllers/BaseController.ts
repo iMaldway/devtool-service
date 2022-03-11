@@ -1,17 +1,25 @@
-const HttpResponse = require('../class/HttpResponse')
-const HttpExcetion = require('../class/HttpExcetion')
-const JudgeUtils = require('../utils/JudgeUtils')
-const ObjectUtils = require('../utils/ObjectUtils')
+import Hold from '../expression/Hold'
 
 import BaseControllerInterface from '../interface/BaseControllerInterface'
+
 
 export default class BaseController implements BaseControllerInterface{
 
 	public service;
-	public HttpExcetion = HttpExcetion;
-	public HttpResponse = HttpResponse;
-	public JudgeUtils = JudgeUtils;
-	public ObjectUtils = ObjectUtils;
+
+	public Api;
+
+	@Hold('/src/class')
+	public HttpResponse;
+
+	@Hold('/src/class')
+	public HttpExcetion;
+
+	@Hold('/src/utils')
+	public JudgeUtils;
+
+	@Hold('/src/utils')
+	public ObjectUtils;
 
 	constructor(service) {
 		if (service != null) {
@@ -87,7 +95,7 @@ export default class BaseController implements BaseControllerInterface{
 			throw new this.HttpExcetion(errorMessages, code)
 		} else {
 			// 如果是数组并且查不到数据，则抛出异常
-			if (ObjectUtils.isArrayFn(parameter) && parameter.length <= 0) {
+			if (this.ObjectUtils.isArrayFn(parameter) && parameter.length <= 0) {
 				throw new this.HttpExcetion(errorMessages, code)
 			}
 		}

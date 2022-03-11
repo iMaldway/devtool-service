@@ -1,6 +1,6 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-const Connect = require('../utils/MySql')
 const { resultToTable } = require('../utils/TransformationUtil')
+
+import Example from '../expression/Example'
 
 import BaseDaoInterface from '../interface/BaseDaoInterface'
 
@@ -8,11 +8,12 @@ export default class BaseDao implements BaseDaoInterface{
 
 	public tableName:string;
 	public resultToTable:any;
+
+	@Example('/src/utils','MySql')
 	public MySqlConnect:any;
 
 	constructor(tableName:string) {
 		this.tableName = tableName
-		this.MySqlConnect = new Connect()
 		this.resultToTable = resultToTable
 	}
 
