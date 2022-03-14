@@ -16,7 +16,7 @@ export default function Injection (params:InjectionType) {
         for (let f of JsFiles) {
             let src:string[] = f.split('.');
             if(src[0] === key){
-                console.log(`自动注入: ${f}...`)
+                console.log(`--自动注入: ${f}...`)
                 const Service = require(path + '/' + src[0])
                 let service = new Service();
                 target[key] = service;

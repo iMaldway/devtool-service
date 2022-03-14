@@ -17,7 +17,7 @@ export default function Hold (params:string,fileName?:string) {
             let src:string[] = f.split('.');
             const compare = fileName ? fileName :key;
             if(src[0] === compare){
-                console.log(`自动持有: ${f}...`)
+                console.log(`--自动持有: ${f}...`)
                 target[key] = require(path + '/' + src[0])
                 break
             }

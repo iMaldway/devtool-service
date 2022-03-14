@@ -10,5 +10,7 @@
     "sourceType": "module",
     "requireConfigFile": false
   },
-  "rules": {}
+  "rules": {
+    "no-cond-assign": 1
+  }
 }

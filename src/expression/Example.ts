@@ -16,7 +16,7 @@ export default function Example (params:string,fileName?:string) {
             let src:string[] = f.split('.');
             const compare = fileName ? fileName :key;
             if(src[0] === compare){
-                console.log(`自动实例化: ${f}...`)
+                console.log(`--自动实例化: ${f}...`)
                 const Service = require(path + '/' + src[0])
                 let service = new Service();
                 target[key] = service
