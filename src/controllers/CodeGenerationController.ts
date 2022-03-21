@@ -1,4 +1,4 @@
-const BaseController = require("./BaseController");
+import BaseController from "./BaseController";
 /**
  * @todo 生成Api
  */

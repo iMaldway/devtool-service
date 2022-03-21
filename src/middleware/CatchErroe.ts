@@ -1,5 +1,5 @@
-const HttpExcetion = require("../class/HttpExcetion");
-const HttpResponse = require("../class/HttpResponse");
+import HttpExcetion from "../class/HttpExcetion";
+import HttpResponse from "../class/HttpResponse";
 
 const CatchErroe = async (ctx: any, next: any) => {
   try {
@@ -11,7 +11,7 @@ const CatchErroe = async (ctx: any, next: any) => {
       results.data = null;
       results.code = error.code;
       results.message = error.message;
-      results.error = error;
+      results.errors = error;
     } else {
       results.data = null;
       results.code = 500;
@@ -49,7 +49,7 @@ const CatchErroe = async (ctx: any, next: any) => {
           break;
       }
       results.message = message;
-      results.error = error;
+      results.errors = error;
     }
     ctx.body = results;
     return ctx.body;

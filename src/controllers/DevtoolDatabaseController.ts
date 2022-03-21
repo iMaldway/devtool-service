@@ -1,4 +1,4 @@
-const BaseController = require("./BaseController");
+import BaseController from "./BaseController";
 
 export default class Controller extends BaseController {
   constructor() {

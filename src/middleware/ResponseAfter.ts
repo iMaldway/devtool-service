@@ -1,11 +1,11 @@
-const { tableToResult } = require("../utils/TransformationUtil");
-const HttpResponse = require("../class/HttpResponse");
+import { tableToResult } from "../utils/TransformationUtil";
+import HttpResponse from "../class/HttpResponse";
 
 import { RequestTypeEnum } from "../enum/HttpEnum";
 
 // 导出函数
 const ResponseAfter = async function (ctx: any, next: any) {
-  let data = null;
+  let data: any;
   const url = ctx.url;
   console.log("Response URL: ", url);
   switch (ctx.method) {
@@ -22,7 +22,7 @@ const ResponseAfter = async function (ctx: any, next: any) {
       data = tableToResult(ctx.response.body);
       break;
     default:
-      data = new HttpResponse(null, 500, "不支持的请求类型", null);
+      data = new HttpResponse(null, undefined, 500, "不支持的请求类型");
       break;
   }
   ctx.response.body = data;

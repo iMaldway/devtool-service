@@ -1,4 +1,4 @@
-const { resultToTable } = require("../utils/TransformationUtil");
+import { resultToTable } from "../utils/TransformationUtil";
 
 import Example from "../expression/Example";
 

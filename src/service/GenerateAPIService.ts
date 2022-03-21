@@ -1,8 +1,7 @@
-const BaseService = require("./BaseService");
+import Basicservice from "./Basicservice";
+import puppeteer from "puppeteer";
 
-const puppeteer = require("puppeteer");
-
-export default class Service extends BaseService {
+export default class Service extends Basicservice {
   public applicationPage;
 
   constructor() {

@@ -1,10 +1,10 @@
 import Injection from "../expression/Injection";
 import InjectionType from "../enum/InjectionType";
-const BaseService = require("./BaseService");
-const { tableToResult } = require("../utils/TransformationUtil");
-const ejs = require("ejs");
+import Basicservice from "./Basicservice";
+import { tableToResult } from "../utils/TransformationUtil";
+import ejs from "ejs";
 
-export default class Service extends BaseService {
+export default class Service extends Basicservice {
   @Injection(InjectionType.Dao)
   public DevtoolDatabaseDAO: any;
 
