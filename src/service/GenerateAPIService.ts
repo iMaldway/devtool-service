@@ -3,7 +3,6 @@ const BaseService = require("./BaseService");
 const puppeteer = require("puppeteer");
 
 export default class Service extends BaseService {
-
   public applicationPage;
 
   constructor() {
@@ -16,10 +15,10 @@ export default class Service extends BaseService {
    * @param {url} 解析地址
    * @param {body} 解析规则
    */
-  async getAnalysisOutPut(url:string, body:string) {
+  async getAnalysisOutPut(url: string, body: string) {
     const output = {};
-    const width:number = 1024;
-    const height:number = 1024;
+    const width: number = 1024;
+    const height: number = 1024;
     try {
       let browser = await puppeteer.launch({
         devtools: false,
@@ -40,11 +39,11 @@ export default class Service extends BaseService {
       await this.applicationPage.setViewport({ width: width, height: height });
       await this.applicationPage.setUserAgent("UA-TEST");
       // 导航到指定地址
-      await this.applicationPage.goto(url,{waitUntil: 'domcontentloaded'});
+      await this.applicationPage.goto(url, { waitUntil: "domcontentloaded" });
       // 延时等待3秒
       await this.wait(3000);
       // 当解析规则存在的时候
-      let analysis:string = body;
+      let analysis: string = body;
       analysis = typeof analysis === "string" ? JSON.parse(analysis) : analysis;
       try {
         await this.analysisContent(analysis, output);
@@ -60,7 +59,7 @@ export default class Service extends BaseService {
     }
     return output;
   }
-  async clickElement(selector, page) {
+  async clickElement(selector: any, page: any) {
     try {
       await page.evaluate((selector) => {
         let nodes = document.querySelectorAll(selector);
@@ -75,7 +74,7 @@ export default class Service extends BaseService {
     }
     return Promise.resolve(true);
   }
-  async analysisContent(analysis, output) {
+  async analysisContent(analysis: any, output: any) {
     // 如果有前置操作则触发一次点击操作
     if (analysis.before) {
       await this.clickElement(analysis.before.selector, this.applicationPage);
@@ -84,7 +83,7 @@ export default class Service extends BaseService {
     if (analysis.output) {
       for (let i = 0; i < analysis.output.length; i++) {
         let itme = analysis.output[i];
-        let value = '';
+        let value = "";
         try {
           // 任何输出都是往对象中添加属性
           value = await this.applicationPage.evaluate((itme) => {
@@ -119,11 +118,11 @@ export default class Service extends BaseService {
         output[analysis.children.name] = [];
       }
       // 获取所有符合的节点，如果存在根节点属性，则从根节点开始寻找
-      let newNodes:any[] = [];
-      let nowNode = this.applicationPage
+      let newNodes: any[] = [];
+      let nowNode = this.applicationPage;
       if (analysis.children.root) {
         nowNode = await this.applicationPage.$(analysis.selector);
-      } 
+      }
       newNodes = await nowNode.$$(analysis.children.selector);
 
       console.log(
@@ -144,10 +143,10 @@ export default class Service extends BaseService {
             output[analysis.children.name][i]
           );
         } catch (error) {
-          console.error('递归异常：',error)
-        }finally{
+          console.error("递归异常：", error);
+        } finally {
           // 销毁
-          if(newNode && newNode.dispose){
+          if (newNode && newNode.dispose) {
             newNode.dispose();
           }
         }
