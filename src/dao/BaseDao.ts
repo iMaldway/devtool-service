@@ -134,8 +134,13 @@ export default class BaseDao implements BaseDaoInterface {
       _sql = "SELECT SQL_CALC_FOUND_ROWS * FROM `" + table + "` WHERE 1=1 AND ";
       // 循环处理
       for (const key in val) {
-        _key += key + " = ? AND ";
-        _valueList.push(val[key]);
+        if (typeof val[key] === "string") {
+          _key += key + " LIKE ? AND ";
+          _valueList.push("%" + val[key] + "%");
+        } else {
+          _key += key + " = ? AND ";
+          _valueList.push(val[key]);
+        }
       }
       _sql = _sql + _key;
       _sql = _sql.substring(0, _sql.length - 4);
@@ -175,8 +180,13 @@ export default class BaseDao implements BaseDaoInterface {
       _sql = "SELECT COUNT(*) as total FROM `" + table + "` WHERE 1=1 AND ";
       // 循环处理
       for (const key in val) {
-        _key += key + " = ? AND ";
-        _valueList.push(val[key]);
+        if (typeof val[key] === "string") {
+          _key += key + " LIKE ? AND ";
+          _valueList.push("%" + val[key] + "%");
+        } else {
+          _key += key + " = ? AND ";
+          _valueList.push(val[key]);
+        }
       }
       _sql = _sql + _key;
       _sql = _sql.substring(0, _sql.length - 4);

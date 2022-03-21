@@ -59,7 +59,6 @@ export default class BaseService
       if (parameters && parameters.id) {
         data = res ? res[0] : {};
       } else {
-        console.log(resTotal);
         data["list"] = res;
         data["total"] = resTotal ? resTotal[0].total : 0;
       }
