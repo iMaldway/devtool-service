@@ -26,9 +26,6 @@ export default class BaseService
         } else {
           const TargetDao = require("../dao/" + dao);
           this.dao = new TargetDao();
-          // import('../dao/' + dao).then((dao)=>{
-          // 	this.dao = dao
-          // })
         }
       }
     } catch (error) {
