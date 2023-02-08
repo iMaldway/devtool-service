@@ -11,9 +11,15 @@ export default class BaseDao implements BaseDaoInterface {
   @Example("/driven")
   public MySql: any;
 
+  /**
+   * @todo 数据库连接
+   */
+  public DATABASE: any;
+
   constructor(tableName: string) {
     this.tableName = tableName;
     this.resultToTable = resultToTable;
+    this.DATABASE = this.MySql;
   }
 
   /** *
@@ -54,7 +60,7 @@ export default class BaseDao implements BaseDaoInterface {
       console.log(e);
     }
     if (_sql != "") {
-      return this.MySql.query(_sql, _valueList);
+      return this.DATABASE.query(_sql, _valueList);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }
@@ -102,7 +108,7 @@ export default class BaseDao implements BaseDaoInterface {
       console.log(e);
     }
     if (_sql != "") {
-      return this.MySql.query(_sql, _valueList);
+      return this.DATABASE.query(_sql, _valueList);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }
@@ -153,7 +159,7 @@ export default class BaseDao implements BaseDaoInterface {
       console.log(e);
     }
     if (_sql != "") {
-      return this.MySql.query(_sql, _valueList);
+      return this.DATABASE.query(_sql, _valueList);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }
@@ -197,7 +203,7 @@ export default class BaseDao implements BaseDaoInterface {
       console.log(e);
     }
     if (_sql != "") {
-      return this.MySql.query(_sql, _valueList);
+      return this.DATABASE.query(_sql, _valueList);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }
@@ -239,7 +245,7 @@ export default class BaseDao implements BaseDaoInterface {
       console.log(e);
     }
     if (_sql != "") {
-      return this.MySql.query(_sql, _valueList);
+      return this.DATABASE.query(_sql, _valueList);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }

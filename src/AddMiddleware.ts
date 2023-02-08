@@ -1,27 +1,27 @@
 /*eslint no-path-concat: "warn"*/
 /*eslint no-unused-vars: "warn"*/
-import fs from "fs";
-import KoaRouter from "koa-router";
+import fs from 'fs'
+import KoaRouter from 'koa-router'
 // 扫描白名单,在此名单下的将不会被添加
-const whiteList: string[] = ["BaseController.js"];
+const whiteList: string[] = ['BaseController.js']
 // 扫描指定文件夹下的控制器并将它添加到路由中
 function addMapping(router: any, mapping: []): void {
   for (let url in mapping) {
-    let path: string = "";
-    if (url.startsWith("GET ")) {
-      path = url.substring(4);
-      router.get(path, mapping[url]);
-    } else if (url.startsWith("POST ")) {
-      path = url.substring(5);
-      router.post(path, mapping[url]);
-    } else if (url.startsWith("DELETE ")) {
-      path = url.substring(7);
-      router.delete(path, mapping[url]);
-    } else if (url.startsWith("PUT ")) {
-      path = url.substring(4);
-      router.put(path, mapping[url]);
+    let path: string = ''
+    if (url.startsWith('GET ')) {
+      path = url.substring(4)
+      router.get(path, mapping[url])
+    } else if (url.startsWith('POST ')) {
+      path = url.substring(5)
+      router.post(path, mapping[url])
+    } else if (url.startsWith('DELETE ')) {
+      path = url.substring(7)
+      router.delete(path, mapping[url])
+    } else if (url.startsWith('PUT ')) {
+      path = url.substring(4)
+      router.put(path, mapping[url])
     } else {
-      console.log(`无效的URL: ${url}`);
+      console.log(`无效的URL: ${url}`)
     }
   }
 }
@@ -30,22 +30,22 @@ function addMapping(router: any, mapping: []): void {
  * 去重
  */
 function merge(source: [], target: []): [] {
-  const and = [...source, ...target];
-  const output: [] = [];
+  const and = [...source, ...target]
+  const output: [] = []
   for (let i = 0; i < and.length; i++) {
-    const it = and[i];
-    let w = null;
+    const it = and[i]
+    let w = null
     for (let t = i + 1; t < and.length; t++) {
-      const tt = and[t];
+      const tt = and[t]
       if (it == tt) {
-        w = tt;
+        w = tt
       }
     }
     if (w == null) {
-      output.push(it);
+      output.push(it)
     }
   }
-  return output;
+  return output
 }
 
 /**
@@ -54,37 +54,39 @@ function merge(source: [], target: []): [] {
  */
 function eliminate(source: string[], target: string[]): string[] {
   for (let i = 0; i < target.length; i++) {
-    const it = target[i];
+    const it = target[i]
     for (let t = 0; t < source.length; t++) {
-      let st = source[t];
+      let st = source[t]
       if (st == it) {
-        st = "";
+        st = ''
       }
     }
   }
   return source.filter(function (s) {
-    return s && s !== "" && (s + "").trim();
-  });
+    return s && s !== '' && (s + '').trim()
+  })
 }
 
 function addControllers(router: any, dir: string): void {
-  let files = fs.readdirSync(__dirname + "/" + dir);
-  let JsFiles: string[] = eliminate(files, whiteList);
+  let files = fs.readdirSync(__dirname + '/' + dir)
+  let JsFiles: string[] = eliminate(files, whiteList)
   for (var f of JsFiles) {
-    console.log(`添加控制器: ${f}...`);
-    const Controller = require(__dirname + "/" + dir + "/" + f);
-    let mapping = new Controller();
-    addMapping(router, mapping.Api);
+    if (f.indexOf('.map') <= 0) {
+      console.log(`添加控制器: ${f}...`)
+      const Controller = require(__dirname + '/' + dir + '/' + f)
+      let mapping = new Controller()
+      addMapping(router, mapping.Api)
+    }
   }
 }
 
 // 导出动态挂载控制器函数
-function mount(dir: string = "controllers") {
+function mount(dir: string = 'controllers') {
   // 如果不传参数，扫描目录默认为'controllers'
-  const router = new KoaRouter();
-  addControllers(router, dir);
-  return router.routes();
+  const router = new KoaRouter()
+  addControllers(router, dir)
+  return router.routes()
 }
 
-module.exports = mount;
-export default mount;
+module.exports = mount
+export default mount

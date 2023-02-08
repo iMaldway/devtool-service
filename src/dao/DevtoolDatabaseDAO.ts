@@ -85,7 +85,7 @@ export default class Dao extends BaseDao {
     let errro = null;
     if (_sql != "") {
       console.log(_sql);
-      return this.MySql.query(_sql, []);
+      return this.DATABASE.query(_sql, []);
     } else {
       return Promise.reject(new Error(errro || "Error"));
     }
